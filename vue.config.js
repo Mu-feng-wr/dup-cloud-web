@@ -36,15 +36,6 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    proxy: {
-      '/dup-cloud': {
-        target: 'https://portal.gzsjjs.com:58087',
-        changeOrigin: true, // 支持跨域
-        pathRewrite: { // 重写路径: 去掉路径中开头的'/api'
-          ['^' + '/dup-cloud']: ''
-        }
-      }
-    },
     before: require('./mock/mock-server.js')
   },
   configureWebpack: {

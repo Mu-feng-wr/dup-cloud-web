@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      login({ companyCode: 'test', password: '123456', username: '梁伟涛' })
+      this.$store.dispatch('system/loginHandler', { companyCode: 'test', password: '123456', username: '梁伟涛' })
     }
   }
 }
