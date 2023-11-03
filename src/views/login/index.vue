@@ -25,7 +25,6 @@ export default {
   },
   data() {
     return {
-      loginSkin: 'blue',
       backgroundImageUrls: [bgImg1, bgImg2, bgImg3, bgImg4]
     }
   },

@@ -30,7 +30,7 @@ module.exports = {
       'before': true,
       'after': true
     }],
-    'block-spacing': [2, 'always'],
+    // 'block-spacing': [2, 'always'],
     'brace-style': [2, '1tbs', {
       'allowSingleLine': true
     }],
@@ -47,7 +47,7 @@ module.exports = {
     'curly': [2, 'multi-line'],
     'dot-location': [2, 'property'],
     'eol-last': 2,
-    // 'eqeqeq': ["error", "always", {"null": "ignore"}],
+    // 'eqeqeq': ["error", "always", { "null": "ignore" }],
     'generator-star-spacing': [2, {
       'before': true,
       'after': true
