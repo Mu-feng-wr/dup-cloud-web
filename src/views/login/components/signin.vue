@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { login } from '@/api/dup/system.js'
 export default {
   components: {
   },
