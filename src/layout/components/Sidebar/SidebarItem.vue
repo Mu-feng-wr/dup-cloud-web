@@ -1,7 +1,7 @@
 <template>
   <div v-if="!item.hidden">
     <template v-if="!item.list||item.list.length==0">
-      <app-link :to="'/login'">
+      <app-link :to="'/unification/unificationPage'">
         <el-menu-item :index="item.name">
           {{ item.name }}
         </el-menu-item>
@@ -17,7 +17,7 @@
         :key="child.name"
         :is-nest="true"
         :item="child"
-        base-path="/login"
+        base-path="/unification/unificationPage"
         class="nest-menu"
       />
     </el-submenu>

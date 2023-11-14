@@ -36,6 +36,7 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    headers: { 'Access-Control-Allow-0rigin': '*' },
     before: require('./mock/mock-server.js')
   },
   configureWebpack: {

@@ -1,29 +1,30 @@
 import Vue from 'vue'
 
-import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+import 'normalize.css/normalize.css'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
-
-import '@/styles/index.scss' // global css
+import locale from 'element-ui/lib/locale/lang/en'
+import '@/styles/index.scss'
 
 import App from './App'
 import store from './store'
 import router from './router'
 
-import '@/icons' // icon
-import '@/permission' // permission control
-import '@/styles/global.scss' // global css
+import '@/icons'
+import '@/permission'
+import '@/styles/global.scss'
 
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online ! ! !
- */
+import WujieVue from 'wujie-vue2'
+import hostMap from '@/hostMap.js'
+Vue.use(WujieVue)
+const { setupApp } = WujieVue
+setupApp({
+  name: 'authorization',
+  url: hostMap('https'),
+  exec: true
+})
+
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
