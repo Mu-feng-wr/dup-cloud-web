@@ -3,7 +3,7 @@ import request from '@/utils/request'
 /** 登录 */
 export function login(data) {
   return request({
-    url: '/dup-cloud//sys/login',
+    url: '/dup-cloud/sys/login',
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function login(data) {
 /** 获取菜单 权限 */
 export function getMenu(params) {
   return request({
-    url: '/dup-cloud//sys/menu/nav',
+    url: '/dup-cloud/sys/menu/nav',
     method: 'get',
     params
   })

@@ -2,10 +2,9 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getDupToken } from '@/utils/auth'
-// create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  timeout: 5000 // request timeout
+  timeout: 30000 // request timeout
 })
 
 service.interceptors.request.use(
@@ -26,26 +25,26 @@ service.interceptors.response.use(
     const res = response.data
 
     if (res.code !== 0) {
+      if (res.code === 401) {
+        MessageBox.confirm('登录过期', '提示', {
+          type: 'warning',
+          showClose: false,
+          showCancelButton: false
+        }).then(() => {
+          store.dispatch('system/logOut')
+        })
+        return Promise.reject(res)
+      }
+
       Message({
-        message: res.message || 'Error',
+        message: res.msg || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
 
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        MessageBox.confirm('', '', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(res)
     } else {
-      return res
+      return Promise.resolve(res)
     }
   },
   error => {

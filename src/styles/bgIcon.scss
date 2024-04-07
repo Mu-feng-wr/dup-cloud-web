@@ -1,0 +1,10 @@
+@mixin bg_icon($w:20px,$h:25px,$iconName:''){
+	display: inline-block;
+    width: $w;
+    height: $h;
+    background-size: $w $h;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    background-image: url("~@/assets/images/icons/"+$iconName);
+}

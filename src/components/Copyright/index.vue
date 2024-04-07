@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-text">© 2023 广州机施建设集团有限公司版权所有</div>
+  <div class="footer-text">© {{ $vxe.toDateString(new Date(),'yyyy') }} 广州机施建设集团有限公司版权所有</div>
 </template>
 <style lang="scss" scoped>
 .footer-text {
