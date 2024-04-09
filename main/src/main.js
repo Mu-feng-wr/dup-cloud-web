@@ -15,6 +15,7 @@ import '@/permission'
 import WujieVue from 'wujie-vue2'
 import hostMap from '@/hostMap.js'
 import '@/components/VXETable.js'
+import '@/components/index.js'
 Vue.use(WujieVue)
 const { setupApp } = WujieVue
 setupApp({

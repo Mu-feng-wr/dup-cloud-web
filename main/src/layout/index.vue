@@ -1,5 +1,5 @@
 <template>
-  <div :class="isCollapse?'hideSidebar':''" class="app-wrapper">
+  <div :class="isCollapse ? 'hideSidebar' : 'visibleSidebar'" class="app-wrapper">
     <sidebar class="sidebar-container" />
     <div class="main-container">
       <div class="fixed-header">
@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     isCollapse() {
-      return this.$store.getters.isCollapse || false
+      return this.$store.getters.isCollapse
     }
   }
 }
@@ -64,7 +64,7 @@ export default {
 }
 
 .hideSidebar .fixed-header {
-  width: calc(100% - 54px);
+  width: calc(100% - 64px);
 }
 
 .mobile .fixed-header {

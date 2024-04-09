@@ -1,33 +1,34 @@
 <template>
   <div>
-    <div class="logo">logo</div>
+    <div :class="isCollapse ? 'isCollapseLogo' : 'logo'">
+      <img :src="require('@/assets/images/theme1/indexLogo.png')" alt />
+    </div>
     <div class="menu">
       <el-menu :collapse="isCollapse">
         <template v-for="item in menuList">
-          <el-submenu v-if="item.list&&item.list.length>0" :key="item.menuId" :index="String(item.menuId)">
+          <el-submenu v-if="item.list && item.list.length > 0" :key="item.menuId" :index="String(item.menuId)" popper-class="popperClass">
             <template slot="title">
-              <i class="el-icon-location" />
+              <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon-' + item.icon" />
               <span>{{ item.name }}</span>
             </template>
             <el-menu-item v-for="temp in item.list" :key="temp.menuId" :index="String(temp.url)">
-              <i class="el-icon-setting" />
+              <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon' + temp.icon" />
               <span slot="title">{{ temp.name }}</span>
             </el-menu-item>
           </el-submenu>
-          <el-menu-item v-else :key="item.menuId" :index="item.url">
-            <i class="el-icon-setting" />
+          <el-menu-item v-else :key="String(item.menuId)" :index="item.url">
+            <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon' + item.icon" />
             <span slot="title">{{ item.name }}</span>
           </el-menu-item>
         </template>
       </el-menu>
     </div>
-    <div class="collapse" :class="isCollapse?'notCollapse':'isCollapse'">
-      <i v-if="!isCollapse" class="el-icon-s-fold" @click="changeIsCollapse" />
-      <i v-if="isCollapse" class="el-icon-s-unfold" @click="changeIsCollapse" />
+    <div class="collapse" :class="isCollapse ? 'notCollapse' : 'isCollapse'">
+      <i v-if="!isCollapse" class="el-icon-s-fold" @click="changeIsCollapse"></i>
+      <i v-if="isCollapse" class="el-icon-s-unfold" @click="changeIsCollapse"></i>
     </div>
   </div>
 </template>
-
 <script>
 export default {
   computed: {
@@ -40,7 +41,6 @@ export default {
   },
   methods: {
     changeIsCollapse() {
-      console.log(this.menuList)
       this.$store.commit('system/SET_ISCOLLAPSE', !this.$store.getters.isCollapse)
     }
   }
@@ -48,13 +48,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.isCollapseLogo {
+  height: 50px;
+  padding: 5px 7px;
+}
 .logo {
   height: 50px;
+  padding: 5px 11px;
 }
 .menu {
   height: calc(100% - 110px);
   overflow: auto;
   scrollbar-width: none;
+  padding: 15px 0;
 }
 .collapse {
   height: 55px;
