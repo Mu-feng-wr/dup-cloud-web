@@ -1,6 +1,6 @@
 <template>
   <el-container class="user-layout">
-    <div class="login-left" :style="backgroundStyle" />
+    <div class="login-left" :style="backgroundStyle"></div>
     <el-container class="login-right">
       <el-main>
         <signin />

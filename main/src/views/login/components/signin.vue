@@ -7,14 +7,14 @@
         <div class="input-group">
           <el-input v-model="formData.username" placeholder="请输入账号">
             <template slot="prepend">
-              <i class="icon el-icon-user" />
+              <i class="icon el-icon-user"></i>
             </template>
           </el-input>
         </div>
         <div class="input-group">
           <el-input v-model="formData.password" placeholder="请输入密码" type="password" show-password>
             <template slot="prepend">
-              <i class="icon el-icon-lock" />
+              <i class="icon el-icon-lock"></i>
             </template>
           </el-input>
         </div>
