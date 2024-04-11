@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { Message } from 'element-ui'
 import store from '@/store'
 import { getDupToken } from '@/utils/auth'
 const service = axios.create({
@@ -8,31 +8,25 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(
-  config => {
+  (config) => {
     if (getDupToken()) {
       config.headers['Token'] = getDupToken()
     }
+    delete config.headers.Cookie
     return config
   },
-  error => {
+  (error) => {
     return Promise.reject(error)
   }
 )
 
 service.interceptors.response.use(
-
-  response => {
+  (response) => {
     const res = response.data
 
     if (res.code !== 0) {
       if (res.code === 401) {
-        MessageBox.confirm('登录过期', '提示', {
-          type: 'warning',
-          showClose: false,
-          showCancelButton: false
-        }).then(() => {
-          store.dispatch('system/logOut')
-        })
+        store.dispatch('system/logOut')
         return Promise.reject(res)
       }
 
@@ -47,7 +41,7 @@ service.interceptors.response.use(
       return Promise.resolve(res)
     }
   },
-  error => {
+  (error) => {
     console.log('err' + error)
     Message({
       message: error.message,

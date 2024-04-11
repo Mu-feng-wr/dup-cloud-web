@@ -71,7 +71,7 @@ export default {
             title: '提示',
             message: '登录成功',
             type: 'success',
-            duration: 1500,
+            duration: 500,
             position: 'bottom-right',
             onClose: () => {
               this.$router.push({ path: '/' })

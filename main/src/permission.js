@@ -1,15 +1,15 @@
 import router from './router'
 import store from './store'
-import { Message } from 'element-ui'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
-import { getDupToken } from '@/utils/auth' // get token from cookie
+// import { Message } from 'element-ui'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+import { getDupToken } from '@/utils/auth'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/login'] // 白名单
 
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   NProgress.start()
 
   const hasToken = getDupToken()
@@ -19,17 +19,15 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      const hasGetUserInfo = store.getters.name
-      if (hasGetUserInfo) {
+      const menulist = store.getters.menuList
+      if (menulist.length > 0) {
         next()
       } else {
         try {
           await store.dispatch('system/getMenulist')
-          next()
+          store.dispatch('system/getUserInfo')
+          next(to.redirectedFrom)
         } catch (error) {
-          // await store.dispatch('user/resetToken')
-          Message.error(error || 'Has Error')
-          next(`/login`)
           NProgress.done()
         }
       }

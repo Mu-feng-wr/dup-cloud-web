@@ -11,12 +11,12 @@
               <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon-' + item.icon" />
               <span>{{ item.name }}</span>
             </template>
-            <el-menu-item v-for="temp in item.list" :key="temp.menuId" :index="String(temp.url)">
+            <el-menu-item v-for="temp in item.list" :key="temp.menuId" :index="String(temp.url)" @click="tolink(temp)">
               <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon' + temp.icon" />
               <span slot="title">{{ temp.name }}</span>
             </el-menu-item>
           </el-submenu>
-          <el-menu-item v-else :key="String(item.menuId)" :index="item.url">
+          <el-menu-item v-else :key="String(item.menuId)" :index="item.url" @click="tolink(item)">
             <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon' + item.icon" />
             <span slot="title">{{ item.name }}</span>
           </el-menu-item>
@@ -42,6 +42,9 @@ export default {
   methods: {
     changeIsCollapse() {
       this.$store.commit('system/SET_ISCOLLAPSE', !this.$store.getters.isCollapse)
+    },
+    tolink(item) {
+      this.$router.push({ path: '/' + item.url })
     }
   }
 }
