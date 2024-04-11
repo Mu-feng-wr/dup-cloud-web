@@ -50,7 +50,7 @@ const actions = {
   getMenulist({ commit }) {
     return new Promise((resolve, reject) => {
       getMenu().then((res) => {
-        commit('SET_MENULIST', res.menuList)
+        commit('SET_MENULIST', [{ name: '首页', icon: 'shouye', url: 'home' }, ...res.menuList])
         const routerList = []
         menuRecursion(res.menuList, routerList)
         router.addRoutes(routerList)
@@ -102,11 +102,12 @@ const menuRecursion = (list, routerList) => {
     }
     // 菜单级
     if (item.type == 1) {
+      const module = item.url.split('/').slice(0, 2)
       routerList.push({
         path: '/' + item.url,
         component: Layout,
         name: item.url,
-        meta: { title: item.name }
+        meta: { title: item.name, module: module.join('/') }
       })
     }
   })

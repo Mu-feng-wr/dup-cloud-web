@@ -1,8 +1,5 @@
-# 约纽科技资产系统子应用--监控
-```bash
-# 克隆项目
-git clone https://gitee.com/yuenew/scamo-visual-cloud-web.git
 
+```bash
 # 安装依赖
 npm install
 
@@ -12,16 +9,11 @@ npm install --registry=https://registry.npm.taobao.org
 # 启动服务
 npm run dev
 ```
-浏览器访问 [http://localhost:19012/visual](http://localhost:19012/visual)
 
 ## 子应用说明
 ```bash
 #  .env.development 开发环境配置文件
     子应用可以单独访问
-    可以配置登录账号和密码
-    重新配置账号密码之后需要重启项目，退出账号重新登录才会生效
-# .env.production  生产环境配置文件
-    生产环境主应用地址  VUE_APP_MAIN_URL  生产环境进入子应用时，会跳到这个地址
 
 # 可以通过 window.$wujie 访问主应用、获取主应用的资源
 ```

@@ -1,15 +1,15 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'access_token'
+const TokenKey = 'bspToken'
 
-export function getToken() {
+export function getBspToken() {
   return Cookies.get(TokenKey)
 }
 
-export function setToken(token) {
+export function setBspToken(token) {
   return Cookies.set(TokenKey, token)
 }
 
-export function removeToken() {
+export function removeBspToken() {
   return Cookies.remove(TokenKey)
 }

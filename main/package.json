@@ -25,7 +25,7 @@
     "vue": "2.6.10",
     "vue-router": "3.0.6",
     "vuex": "3.1.0",
-    "wujie-vue2": "^1.0.22",
+    "wujie-vue2": "1.0.18",
     "xe-utils": "^3.5.13"
   },
   "devDependencies": {

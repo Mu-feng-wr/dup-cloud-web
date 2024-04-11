@@ -6,7 +6,7 @@
     <div class="menu">
       <el-menu :default-active="active" :collapse="isCollapse">
         <template v-for="item in menuList">
-          <el-submenu v-if="item.list && item.list.length > 0" :key="item.menuId" :index="'/' + item.url" popper-class="popperClass">
+          <el-submenu v-if="item.list && item.list.length > 0" :key="item.menuId" :index="String(item.menuId)" popper-class="popperClass">
             <template slot="title">
               <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon-' + item.icon" />
               <span>{{ item.name }}</span>
@@ -17,7 +17,7 @@
             </el-menu-item>
           </el-submenu>
           <el-menu-item v-else :key="String(item.menuId)" :index="'/' + item.url" @click="tolink(item)">
-            <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon' + item.icon" />
+            <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon-' + item.icon" />
             <span slot="title">{{ item.name }}</span>
           </el-menu-item>
         </template>

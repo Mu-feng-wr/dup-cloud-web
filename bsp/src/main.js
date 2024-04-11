@@ -18,14 +18,6 @@ import 'vxe-table/lib/style.css'
 
 Vue.use(ElementUI, { size: 'small' })
 
-import { download } from '@/utils/request.js'
-Vue.prototype.download = download
-
-// 路由跳转
-import { routerLink, closePage } from '@/utils/routerLink.js'
-Vue.prototype.routerLink = routerLink
-Vue.prototype.closePage = closePage
-
 Vue.config.productionTip = false
 
 new Vue({

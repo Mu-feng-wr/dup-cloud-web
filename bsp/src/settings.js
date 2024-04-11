@@ -1,6 +1,5 @@
 module.exports = {
-
-  title: '约纽科技管理系统',
+  title: '供应商门户',
 
   /**
    * @type {boolean} true | false

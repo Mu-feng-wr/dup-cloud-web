@@ -13,21 +13,14 @@ import '@/icons'
 import '@/permission'
 
 import WujieVue from 'wujie-vue2'
-import hostMap from '@/hostMap.js'
 import '@/components/VXETable.js'
 import '@/components/index.js'
 Vue.use(WujieVue)
-const { setupApp } = WujieVue
-setupApp({
-  name: 'authorization',
-  url: hostMap('https'),
-  exec: true
-})
 
-if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
+// if (process.env.NODE_ENV === 'production') {
+//   const { mockXHR } = require('../mock')
+//   mockXHR()
+// }
 
 Vue.use(ElementUI)
 
@@ -37,5 +30,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 })

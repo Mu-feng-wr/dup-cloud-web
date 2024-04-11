@@ -1,6 +1,8 @@
 <template>
-  <div :class="isCollapse ? 'hideSidebar' : 'visibleSidebar'" class="app-wrapper">
-    <sidebar class="sidebar-container" />
+  <div :class="isCollapse ? 'hideSidebar' : 'visibleSidebar'" class="app-wrapper disp-flex">
+    <div class="sidebar">
+      <sidebar class="sidebar-container" />
+    </div>
     <div class="main-container">
       <div class="fixed-header">
         <navbar />
@@ -34,16 +36,16 @@ export default {
 @import '~@/styles/mixin.scss';
 @import '~@/styles/variables.scss';
 
-.app-wrapper {
-  @include clearfix;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  &.mobile.openSidebar {
-    position: fixed;
-    top: 0;
-  }
-}
+// .app-wrapper {
+//   @include clearfix;
+//   position: relative;
+//   height: 100%;
+//   width: 100%;
+//   &.mobile.openSidebar {
+//     position: fixed;
+//     top: 0;
+//   }
+// }
 .drawer-bg {
   background: #000;
   opacity: 0.3;
@@ -55,13 +57,8 @@ export default {
 }
 
 .fixed-header {
-  z-index: 9;
   width: 100%;
   transition: width 0.28s;
-}
-
-.hideSidebar .fixed-header {
-  width: calc(100% - 64px);
 }
 
 .mobile .fixed-header {

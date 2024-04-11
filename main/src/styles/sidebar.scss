@@ -1,13 +1,18 @@
 #app {
-
-  .main-container {
-    min-height: 100%;
-    transition: margin-left .28s;
-    margin-left: $sideBarWidth;
-    position: relative;
+  .app-wrapper{
+    width: 100% !important;
   }
-
+    
+  
   .visibleSidebar{
+    .sidebar{
+      width: $sideBarWidth;
+    }
+    .main-container {
+      min-height: 100%;
+      transition: margin-left .28s;
+      width:calc(100% - #{$sideBarWidth});
+    }
     .sidebar-container {
       transition: width 0.28s;
       width: $sideBarWidth !important;
@@ -24,7 +29,22 @@
       .el-menu {
         background-color: $menuBg ;
         border: none;
-  
+        .el-menu-item{
+          min-width: auto;
+          color: #fff;
+          height: 40px;
+          line-height: 40px;
+          box-sizing: border-box;
+          margin: 0 10px;
+          padding: 0  15px !important;
+          border-radius: 4px;
+        }
+        .el-menu-item:hover,:focus {
+          background-color: #0050b3 !important;
+        }
+        .el-menu-item.is-active{ 
+          background-color: #0050b3 !important;
+        }
         .el-submenu {
           margin: 0 10px;
   
@@ -43,6 +63,7 @@
             border-radius: 4px;
             overflow: hidden;
             text-overflow: ellipsis;
+            margin: 0 0;
           }
           .el-menu-item:hover,:focus {
             background-color: #0050b3 !important;
@@ -72,6 +93,14 @@
   }
 
   .hideSidebar {
+    .sidebar{
+      width: 64px;
+    }
+    .main-container {
+      min-height: 100%;
+      transition: margin-left .28s;
+      width:calc(100% - 64px);
+    }
     .sidebar-container {
       width: 64px !important;
       height: 100%;
@@ -115,9 +144,6 @@
       }
     }
 
-    .main-container {
-      margin-left: 64px;
-    }
 
     .submenu-title-noDropdown {
       padding: 0 !important;
