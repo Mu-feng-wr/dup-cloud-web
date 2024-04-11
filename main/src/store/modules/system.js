@@ -39,7 +39,7 @@ const actions = {
           dispatch('getSrmToken', formData.username)
           dispatch('getCmsToken', formData.username)
           dispatch('getBspToken', formData.username)
-          // dispatch('getBiToken', formData.username)
+          dispatch('getBiToken', formData.username)
           resolve(res)
         })
         .catch((err) => {

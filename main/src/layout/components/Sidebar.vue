@@ -4,19 +4,19 @@
       <img :src="require('@/assets/images/theme1/indexLogo.png')" alt />
     </div>
     <div class="menu">
-      <el-menu :collapse="isCollapse">
+      <el-menu :default-active="active" :collapse="isCollapse">
         <template v-for="item in menuList">
-          <el-submenu v-if="item.list && item.list.length > 0" :key="item.menuId" :index="String(item.menuId)" popper-class="popperClass">
+          <el-submenu v-if="item.list && item.list.length > 0" :key="item.menuId" :index="'/' + item.url" popper-class="popperClass">
             <template slot="title">
               <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon-' + item.icon" />
               <span>{{ item.name }}</span>
             </template>
-            <el-menu-item v-for="temp in item.list" :key="temp.menuId" :index="String(temp.url)" @click="tolink(temp)">
+            <el-menu-item v-for="temp in item.list" :key="temp.menuId" :index="'/' + temp.url" @click="tolink(temp)">
               <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon' + temp.icon" />
               <span slot="title">{{ temp.name }}</span>
             </el-menu-item>
           </el-submenu>
-          <el-menu-item v-else :key="String(item.menuId)" :index="item.url" @click="tolink(item)">
+          <el-menu-item v-else :key="String(item.menuId)" :index="'/' + item.url" @click="tolink(item)">
             <svg-icon :class="isCollapse ? '' : 'mr-5'" :icon-class="'icon' + item.icon" />
             <span slot="title">{{ item.name }}</span>
           </el-menu-item>
@@ -37,6 +37,9 @@ export default {
     },
     menuList() {
       return this.$store.getters.menuList
+    },
+    active() {
+      return this.$route.path
     }
   },
   methods: {

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: $DOCKERHUB_NAMESPACE
+  labels:
+    run: $APP_NAME
+  name: $APP_NAME
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: $APP_NAME
+  template:
+    metadata:
+      labels:
+        run: $APP_NAME
+    spec:
+      containers:
+      - image: $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$releaseTag-$buildtime
+        name: $APP_NAME
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          name: $APP_NAME
+          subPath: nginx.conf
+      volumes:
+      - configMap:
+          name: $APP_NAME-cm
+        name: $APP_NAME

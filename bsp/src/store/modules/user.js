@@ -1,0 +1,25 @@
+const getDefaultState = () => {
+  return {
+    userInfo: {},
+    permissions: []
+  }
+}
+
+const state = getDefaultState()
+
+const mutations = {
+  SET_USERINFO: (state, userInfo) => {
+    state.userInfo = userInfo
+  },
+  SET_PERMISSIONS: (state, permissions) => {
+    state.permissions = permissions
+  }
+}
+
+const actions = {}
+export default {
+  namespaced: true,
+  state,
+  mutations,
+  actions
+}

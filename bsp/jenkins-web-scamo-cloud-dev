@@ -1,0 +1,88 @@
+#!/usr/bin/env groovy
+final def releaseTag = (env.TAG_NAME ?: env.BRANCH_NAME).replace("/", "-")
+def createVersion() {
+    return new Date().format('yyyyMMddHHmmss') }
+
+
+pipeline {
+    agent {
+      node {
+        label 'nodejs'
+      }
+    }
+
+    parameters {
+        string(name:'TAG_NAME',defaultValue: '',description:'')
+    }
+
+    environment {
+        DOCKER_CREDENTIAL_ID = 'dockerhub-id'
+        GITHUB_CREDENTIAL_ID = 'ynkj-ssh-id'
+        KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'
+        REGISTRY = '172.29.146.78:31008'
+        DOCKERHUB_NAMESPACE = 'scamo-cloud-dev'
+        GITHUB_ACCOUNT = 'admin'
+        APP_NAME = 'scamo-cloud-wujie-monitor-web'
+        SONAR_CREDENTIAL_ID = 'sonar-token'
+        releaseTag = (env.TAG_NAME ?: env.BRANCH_NAME).replace("/", "-")
+        stashName = "scamo-cloud-wujie-monitor-web-node-modules"
+        //SONAR_CREDENTIAL_ID = 'sonar-token'
+        buildtime = createVersion()
+    }
+
+    stages {
+      stage('checkout scm') {
+        steps {
+          checkout(scm)
+        }
+      }
+
+      stage('vue环境准备') {
+        steps {
+          container('nodejs') {
+            echo '****************************** vue start... ******************************'
+            sh 'npm install --registry=http://registry.npm.taobao.org'
+          }
+        }
+      }
+
+      stage('build & push') {
+        steps {
+          container('nodejs') {
+            sh 'npm run build:prod'
+            sh "docker build -f Dockerfile -t $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-${releaseTag}-$buildtime ."
+            withCredentials([usernamePassword(passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME', credentialsId: "$DOCKER_CREDENTIAL_ID",)]) {
+              sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
+              sh "docker push $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-${releaseTag}-$buildtime"
+            }
+          }
+        }
+      }
+
+      stage('push latest') {
+        when {
+          branch 'dop'
+        }
+        steps {
+          container('nodejs') {
+            sh 'docker tag  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:SNAPSHOT-$BRANCH_NAME-$BUILD_NUMBER $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:latest '
+            sh 'docker push  $REGISTRY/$DOCKERHUB_NAMESPACE/$APP_NAME:latest '
+          }
+        }
+      }
+
+      stage('deploy app') {
+        steps {
+          container('nodejs') {
+            withCredentials([
+              kubeconfigFile(
+                credentialsId: env.KUBECONFIG_CREDENTIAL_ID,
+                variable: 'KUBECONFIG')
+            ]) {
+              sh 'envsubst < deploy/dev/scamo-cloud-deploy-web.yaml | kubectl apply -f -'
+            }
+          }
+        }
+      }
+    }
+}
