@@ -1,14 +1,14 @@
 <template>
   <section class="app-main">
-    <!-- <transition name="fade-transform" mode="out-in"> -->
-    <!-- <WujieVue v-if="route.meta && route.meta.module" width="100%" height="100%" class="wujie" :url="getUrl()" :name="key" :props="getProps()" /> -->
-    <WujieVue class="wujie" width="100%" height="100%" :url="getUrl()" :name="key" :props="{ baseApp: 'wujie' }" />
-    <!-- <router-view :key="key" /> -->
-    <!-- </transition> -->
+    <transition name="fade-transform" mode="out-in">
+      <WujieVue v-if="route.meta && route.meta.module" width="100%" height="100%" :url="getUrl()" :name="key" :props="getProps()" />
+      <!-- <router-view :key="key" /> -->
+    </transition>
   </section>
 </template>
 
 <script>
+import hostMap from '@/hostMap.js'
 export default {
   name: 'AppMain',
   computed: {
@@ -22,16 +22,22 @@ export default {
   },
   methods: {
     getUrl() {
-      return 'http://localhost:19012/#/404'
+      const origin = `${window.location.protocol}//${window.location.hostname}`
+      const wujieHost = {
+        'bspweb/pm': hostMap(`${origin}:19012/#`)
+      }
+      return wujieHost[this.route.meta.module] + '/404'
     },
-    getProps() {}
+    getProps() {
+      return {}
+    }
   }
 }
 </script>
 
 <style scoped>
 .app-main {
-  min-height: calc(100vh - 50px);
+  height: calc(100vh - 50px);
   background: #efefef;
   width: 100%;
   overflow: hidden;

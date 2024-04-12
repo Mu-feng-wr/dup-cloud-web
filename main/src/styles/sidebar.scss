@@ -2,14 +2,16 @@
   .app-wrapper{
     width: 100% !important;
   }
-    
+  .main-container{
+    position: fixed;
+    right: 0;
+    top: 0;
+  }
   
   .visibleSidebar{
-    .sidebar{
-      width: $sideBarWidth;
-    }
+   
     .main-container {
-      min-height: 100%;
+      height: 100%;
       transition: margin-left .28s;
       width:calc(100% - #{$sideBarWidth});
     }
@@ -19,11 +21,9 @@
       background-color: $menuBg;
       height: 100%;
       position: fixed;
-      // font-size: 0px;
       top: 0;
       bottom: 0;
       left: 0;
-      z-index: 1001;
       overflow: hidden;
   
       .el-menu {
@@ -93,11 +93,8 @@
   }
 
   .hideSidebar {
-    .sidebar{
-      width: 64px;
-    }
     .main-container {
-      min-height: 100%;
+      height: 100%;
       transition: margin-left .28s;
       width:calc(100% - 64px);
     }

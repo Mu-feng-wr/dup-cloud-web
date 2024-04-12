@@ -1,5 +1,6 @@
+const origin = `${window.location.protocol}//${window.location.hostname}`
 const map = {
-  '//localhost:7100/': '//wujie-micro.github.io/demo-react17/'
+  [origin + ':19001/workbenche/#']: `${origin}/workbenche/#`
 }
 
 export default function hostMap(host) {
