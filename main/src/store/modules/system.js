@@ -9,7 +9,6 @@ const getDefaultState = () => {
     userInfo: {}
   }
 }
-
 const state = getDefaultState()
 const mutations = {
   RESET_STATE: (state) => {
@@ -53,6 +52,7 @@ const actions = {
         commit('SET_MENULIST', [{ name: '首页', icon: 'shouye', url: 'home' }, ...res.menuList])
         const routerList = []
         menuRecursion(res.menuList, routerList)
+        console.log(aaa)
         router.addRoutes(routerList)
         resolve()
       })
@@ -103,6 +103,9 @@ const menuRecursion = (list, routerList) => {
     // 菜单级
     if (item.type == 1) {
       const module = item.url.split('/').slice(0, 2)
+      if (!aaa.includes(module.join('/'))) {
+        aaa.push(module.join('/'))
+      }
       routerList.push({
         path: '/' + item.url,
         component: Layout,

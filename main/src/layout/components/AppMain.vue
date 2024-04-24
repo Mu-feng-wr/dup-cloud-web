@@ -1,8 +1,8 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-      <WujieVue v-if="route.meta && route.meta.module" width="100%" height="100%" :url="getUrl()" :name="key" :props="getProps()" />
-      <!-- <router-view :key="key" /> -->
+      <WujieVue v-if="route.meta && route.meta.module" width="100%" height="100%" :url="getUrl()" :name="getUrl()" :props="getProps()" />
+      <router-view v-else :key="key" />
     </transition>
   </section>
 </template>
@@ -16,7 +16,7 @@ export default {
       return this.$route.path
     },
     route() {
-      console.log(this.$route)
+      // console.log(this.$route)
       return this.$route
     }
   },
@@ -24,9 +24,9 @@ export default {
     getUrl() {
       const origin = `${window.location.protocol}//${window.location.hostname}`
       const wujieHost = {
-        'bspweb/pm': hostMap(`${origin}:19012/#`)
+        bspweb: hostMap(`${origin}:19012/#`)
       }
-      return wujieHost[this.route.meta.module] + '/404'
+      return 'http://localhost:19012/#/404'
     },
     getProps() {
       return {}

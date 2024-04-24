@@ -19,7 +19,6 @@ import 'vxe-table/lib/style.css'
 Vue.use(ElementUI, { size: 'small' })
 
 Vue.config.productionTip = false
-
 new Vue({
   el: '#app',
   router,

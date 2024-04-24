@@ -9,6 +9,16 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
+  {
+    path: '/login',
+    component: () => import('@/views/login/index.vue'),
+    hidden: true
+  },
+  {
+    path: '/home',
+    component: () => import('@/views/home/index.vue'),
+    hidden: true
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 
@@ -19,7 +29,7 @@ const createRouter = () =>
   })
 
 const router = createRouter()
-export function resetRouter() {
+export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher
 }

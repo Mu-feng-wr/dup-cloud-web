@@ -2,13 +2,13 @@
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, dir)
 }
 
 const name = defaultSettings.title
 const port = 19012
-const server = process.env.VUE_APP_SERVER // 后台地址、
+const server = process.env.VUE_APP_BSP_SERVER // 后台地址
 module.exports = {
   publicPath: '',
   outputDir: 'dist',
@@ -45,7 +45,7 @@ module.exports = {
       }
     }
   },
-  chainWebpack(config) {
+  chainWebpack (config) {
     config.plugin('preload').tap(() => [
       {
         rel: 'preload',

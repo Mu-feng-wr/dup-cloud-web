@@ -1,6 +1,6 @@
 const origin = `${window.location.protocol}//${window.location.hostname}`
 const map = {
-  [origin + ':19001/workbenche/#']: `${origin}/workbenche/#`
+  [origin + ':19012/#']: `${origin}/19012/#`
 }
 
 export default function hostMap(host) {

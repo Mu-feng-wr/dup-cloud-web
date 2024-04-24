@@ -30,6 +30,18 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: 'page',
+    component: Layout,
+    children: [
+      {
+        path: '/page1',
+        name: 'page',
+        component: () => import('@/views/home/index'),
+        meta: { title: '首页', icon: 'home' }
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

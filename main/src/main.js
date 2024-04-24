@@ -17,11 +17,6 @@ import '@/components/VXETable.js'
 import '@/components/index.js'
 Vue.use(WujieVue)
 
-// if (process.env.NODE_ENV === 'production') {
-//   const { mockXHR } = require('../mock')
-//   mockXHR()
-// }
-
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
