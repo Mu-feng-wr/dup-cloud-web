@@ -28,7 +28,7 @@ const mutations = {
   }
 }
 const actions = {
-  loginHandler({ commit, dispatch }, formData) {
+  loginHandler ({ commit, dispatch }, formData) {
     return new Promise((resolve, reject) => {
       login(formData)
         .then((res) => {
@@ -38,7 +38,7 @@ const actions = {
           dispatch('getSrmToken', formData.username)
           dispatch('getCmsToken', formData.username)
           dispatch('getBspToken', formData.username)
-          dispatch('getBiToken', formData.username)
+          // dispatch('getBiToken', formData.username)
           resolve(res)
         })
         .catch((err) => {
@@ -46,24 +46,23 @@ const actions = {
         })
     })
   },
-  getMenulist({ commit }) {
+  getMenulist ({ commit }) {
     return new Promise((resolve, reject) => {
       getMenu().then((res) => {
         commit('SET_MENULIST', [{ name: '首页', icon: 'shouye', url: 'home' }, ...res.menuList])
         const routerList = []
         menuRecursion(res.menuList, routerList)
-        console.log(aaa)
         router.addRoutes(routerList)
         resolve()
       })
     })
   },
-  getUserInfo({ commit }) {
+  getUserInfo ({ commit }) {
     getUser().then((res) => {
       commit('SET_USERINFO', res.user)
     })
   },
-  logOut({ commit }) {
+  logOut ({ commit }) {
     // 退出登录
     removeDupToken() // 清除dup token
     removeSrmToken() // 清除srm token
@@ -73,22 +72,22 @@ const actions = {
     commit('RESET_STATE')
     router.push({ path: '/login' })
   },
-  getSrmToken({ commit }, userno) {
+  getSrmToken ({ commit }, userno) {
     loginSrm({ userno }).then((res) => {
       setSrmToken(res.token)
     })
   },
-  getCmsToken({ commit }, userno) {
+  getCmsToken ({ commit }, userno) {
     loginCms({ userno }).then((res) => {
       setCmsToken(res.token)
     })
   },
-  getBspToken({ commit }, userno) {
+  getBspToken ({ commit }, userno) {
     loginBsp({ userno }).then((res) => {
       setBspToken(res.token)
     })
   },
-  getBiToken({ commit }, userno) {
+  getBiToken ({ commit }, userno) {
     loginBi({ userno }).then((res) => {
       setBiToken(res.token)
     })
@@ -102,10 +101,7 @@ const menuRecursion = (list, routerList) => {
     }
     // 菜单级
     if (item.type == 1) {
-      const module = item.url.split('/').slice(0, 2)
-      if (!aaa.includes(module.join('/'))) {
-        aaa.push(module.join('/'))
-      }
+      const module = item.url.split('/').slice(0, 1)
       routerList.push({
         path: '/' + item.url,
         component: Layout,

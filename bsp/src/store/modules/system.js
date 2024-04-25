@@ -6,7 +6,8 @@ const getDefaultState = () => {
   return {
     menuList: [],
     permissions: [],
-    userInfo: {}
+    userInfo: {},
+    keepPage: []
   }
 }
 
@@ -21,31 +22,21 @@ const mutations = {
   },
   SET_USERINFO: (state, userInfo) => {
     state.userInfo = userInfo
+  },
+  SET_KEEPPAGE: (state, keepPage) => {
+    state.keepPage = keepPage
   }
 }
 
 const actions = {
-  async loginHandler ({ commit }, formData) {
+  async loginHandler ({ dispatch }, formData) {
     try {
       const res = await login(formData)
       setBspToken(res.token)
-      const menuRes = await getMenu()
-      commit('SET_MUNULIST', menuRes.menuList)
-      commit('SET_PERMISSIONS', menuRes.permissions)
-      createdRouter(menuRes.menuList)
-      router.addRoutes(
-        [
-          {
-            path: '/',
-            component: Layout,
-            redirect: routerList[0].path,
-            children: routerList
-          }
-        ]
-      )
-      return Promise.resolve(res)
+      await dispatch('getMenuList')
+      return Promise.resolve()
     } catch (err) {
-      return Promise.reject(err)
+      return Promise.reject()
     }
   },
   loginOutHandler ({ commit }) {
@@ -59,18 +50,7 @@ const actions = {
       getMenu().then(res => {
         commit('SET_MUNULIST', res.menuList)
         commit('SET_PERMISSIONS', res.permissions)
-        createdRouter(res.menuList)
-        router.addRoutes(
-          [
-            {
-              path: '/',
-              component: Layout,
-              redirect: routerList[0].path,
-              children: routerList
-            }
-          ]
-        )
-        resolve(routerList)
+        resolve()
       }).catch(err => {
         reject(err)
       })
@@ -82,33 +62,6 @@ const actions = {
         commit('SET_USERINFO', res.user)
         resolve()
       })
-    })
-  }
-}
-
-var routerList = []
-function createdRouter (menuList) {
-  if (menuList && menuList.length > 0) {
-    menuList.forEach(item => {
-      if (item.list && item.list.length > 0) {
-        createdRouter(item.list)
-      }
-      if (item.url) {
-        try {
-          const component = require(`@/views/${item.url}/index.vue`)
-          routerList.push({
-            component: component.default,
-            path: item.url,
-            name: item.url
-          })
-        } catch (err) {
-          routerList.push({
-            component: require('@/views/404.vue').default,
-            path: item.url,
-            name: item.url
-          })
-        }
-      }
     })
   }
 }

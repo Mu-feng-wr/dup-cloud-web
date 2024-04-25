@@ -16,7 +16,6 @@ export default {
       return this.$route.path
     },
     route() {
-      // console.log(this.$route)
       return this.$route
     }
   },
@@ -26,7 +25,8 @@ export default {
       const wujieHost = {
         bspweb: hostMap(`${origin}:19012/#`)
       }
-      return 'http://localhost:19012/#/404'
+      console.log(wujieHost[this.$route.meta.module] + this.$route.path)
+      return wujieHost[this.$route.meta.module] + this.$route.path
     },
     getProps() {
       return {}
