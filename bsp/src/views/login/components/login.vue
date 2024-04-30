@@ -2,7 +2,7 @@
   <div class="login-temp">
     <div class="login-content">
       <div class="form-wrap">
-        <div class="fs-30 desc-title">BI大屏系统</div>
+        <div class="fs-30 desc-title">{{ defaultSettings.title }}</div>
         <div class="fs-18 desc-text">Construction Procurement Auxiliary System</div>
         <form>
           <div class="input-group">
@@ -37,6 +37,7 @@ import Cookies from 'js-cookie'
 export default {
   data() {
     return {
+      defaultSettings: require('@/settings.js'),
       formData: {},
       rememberPassword: false,
       errorTitle: '',
