@@ -6,7 +6,8 @@ const getDefaultState = () => {
   return {
     menuList: [],
     isCollapse: false,
-    userInfo: {}
+    userInfo: {},
+    permissions: []
   }
 }
 const state = getDefaultState()
@@ -25,6 +26,9 @@ const mutations = {
   },
   SET_USERINFO: (state, userInfo) => {
     state.userInfo = userInfo
+  },
+  SET_PERMISSIONS: (state, permissions) => {
+    state.permissions = permissions
   }
 }
 const actions = {
@@ -50,6 +54,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       getMenu().then((res) => {
         commit('SET_MENULIST', [{ name: '首页', icon: 'shouye', url: 'home' }, ...res.menuList])
+        commit('SET_PERMISSIONS', res.permissions)
         const routerList = []
         menuRecursion(res.menuList, routerList)
         router.addRoutes(routerList)

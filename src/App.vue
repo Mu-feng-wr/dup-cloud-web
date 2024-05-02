@@ -11,8 +11,8 @@ export default {
 </script>
 <style>
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background-color: #efefef;
   border-radius: 3px;
 }
