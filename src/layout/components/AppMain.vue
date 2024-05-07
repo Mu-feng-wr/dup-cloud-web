@@ -41,6 +41,7 @@ export default {
       const wujieHost = {
         bspweb: hostMap(`${origin}:19012/#`)
       }
+      console.log(wujieHost[this.$route.meta.module] + this.$route.path)
       return wujieHost[this.$route.meta.module] + this.$route.path
     },
     getProps() {
