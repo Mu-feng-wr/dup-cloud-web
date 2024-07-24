@@ -39,7 +39,7 @@ export default {
     getUrl() {
       const origin = `${window.location.protocol}//${window.location.hostname}`
       const wujieHost = {
-        bspweb: hostMap(`${origin}:19012/#`)
+        bspweb: hostMap(`${origin}:19012/bspweb/#`)
       }
       console.log(wujieHost[this.$route.meta.module] + this.$route.path)
       return wujieHost[this.$route.meta.module] + this.$route.path
@@ -61,16 +61,16 @@ export default {
   width: 100%;
   overflow: hidden;
 }
-.app-container{
+.app-container {
   height: 100%;
   padding: 0;
-  .header{
+  .header {
     height: 42px !important;
   }
-  .main{
-    padding:0 16px;
+  .main {
+    padding: 0 16px;
   }
-  .footer{
+  .footer {
     height: auto !important;
   }
 }
