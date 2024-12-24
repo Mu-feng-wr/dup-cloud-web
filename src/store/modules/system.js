@@ -39,10 +39,7 @@ const actions = {
           setDupToken(res.token)
           dispatch('getMenulist')
           dispatch('getUserInfo')
-          dispatch('getSrmToken', formData.username)
-          dispatch('getCmsToken', formData.username)
-          dispatch('getBspToken', formData.username)
-          // dispatch('getBiToken', formData.username)
+
           resolve(res)
         })
         .catch((err) => {
@@ -62,8 +59,11 @@ const actions = {
       })
     })
   },
-  getUserInfo ({ commit }) {
+  getUserInfo ({ commit, dispatch }) {
     getUser().then((res) => {
+      dispatch('getSrmToken', res.user.userNo)
+      dispatch('getCmsToken', res.user.userNo)
+      dispatch('getBspToken', res.user.userNo)
       commit('SET_USERINFO', res.user)
     })
   },
@@ -91,12 +91,8 @@ const actions = {
     loginBsp({ userno }).then((res) => {
       setBspToken(res.token)
     })
-  },
-  getBiToken ({ commit }, userno) {
-    loginBi({ userno }).then((res) => {
-      setBiToken(res.token)
-    })
   }
+
 }
 
 const menuRecursion = (list, routerList) => {
