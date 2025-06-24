@@ -21,11 +21,13 @@
 import Copyright from '@/components/Copyright'
 import hostMap from '@/hostMap.js'
 import Breadcrumb from './Breadcrumb.vue'
+import WujieVue from 'wujie-vue2'
 export default {
   name: 'AppMain',
   components: {
     Copyright,
-    Breadcrumb
+    Breadcrumb,
+    WujieVue
   },
   computed: {
     key() {
